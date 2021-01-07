@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: configmapdemo
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+        strategy: restart_context
+      config:
+        sources:
+          - name: configmapdemo
+configmapdemo.config:
+  varA: ${varA}
+  varB: ${varB}
+server:
+  port: 8081
