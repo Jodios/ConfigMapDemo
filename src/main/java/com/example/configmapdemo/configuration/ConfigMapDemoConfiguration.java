@@ -16,10 +16,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Reads variables from properties file
  * and is creating the swagger configuration
  */
-@Configuration
 @EnableSwagger2
-@RefreshScope
 @ConfigurationProperties("configmapdemo.config")
+@Configuration
 @Getter
 @Setter
 public class ConfigMapDemoConfiguration {

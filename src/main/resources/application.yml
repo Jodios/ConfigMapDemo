@@ -8,6 +8,7 @@ spring:
         mode: event
         strategy: refresh
       config:
+        enabled: true
         sources:
           - name: configmapdemo
 configmapdemo.config:
@@ -20,3 +21,6 @@ management:
     web:
       exposure:
         include: 'health, info, env, refresh'
+  endpoint:
+    restart:
+      enabled: true

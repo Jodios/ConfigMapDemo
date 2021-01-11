@@ -68,3 +68,28 @@ spec:
       nodePort: 30420
   selector:
     app: configmapdemo
+
+
+#    spec:
+#      volumes:
+#        - name: config-volume
+#          configMap:
+#            name: configmapdemo
+#            defaultMode: 420
+#      containers:
+#        - name: configmapdemo
+#          image: 'jodios/configmapdemo:latest'
+#          ports:
+#            - name: http-api
+#              containerPort: 8081
+#              protocol: TCP
+#          resources:
+#            limits:
+#              cpu: 200m
+#              memory: 1Gi
+#            requests:
+#              cpu: 100m
+#              memory: 300Mi
+#          volumeMounts:
+#            - name: config-volume
+#              mountPath: /etc/config
