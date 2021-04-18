@@ -84,4 +84,4 @@ spec:
         paths:
           - backend:
               serviceName: configmapdemo
-              servicePort: 80
+              servicePort: 8081
