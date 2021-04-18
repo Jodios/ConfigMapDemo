@@ -25,11 +25,6 @@ spec:
       containers:
         - name: configmapdemo
           image: #{deployment.image.name}#
-          resources:
-            limits:
-              memory: "60Mi"
-            requests:
-              memory: "50Mi"
           ports:
             - name: http-api
               containerPort: 8081
