@@ -24,7 +24,12 @@ spec:
     spec:
       containers:
         - name: configmapdemo
-          image: 'jodios/configmapdemo:latest'
+          image: #{deployment.image.name}#
+          resources:
+            limits:
+              memory: "60Mi"
+            requests:
+              memory: "50Mi"
           ports:
             - name: http-api
               containerPort: 8081
@@ -32,13 +37,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmapdemo
-          resources:
-            limits:
-              cpu: 200m
-              memory: 1Gi
-            requests:
-              cpu: 100m
-              memory: 300Mi
           imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
@@ -50,8 +48,6 @@ spec:
     rollingUpdate:
       maxUnavailable: 25%
       maxSurge: 25%
-  revisionHistoryLimit: 10
-  progressDeadlineSeconds: 600
 ---
 kind: Service
 apiVersion: v1
@@ -60,36 +56,32 @@ metadata:
   namespace: prod
   labels:
     version: 0.1.203643-1
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/actuator/prometheus"
+    prometheus.io/port: "8081"
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8081
       targetPort: 8081
-      nodePort: 30420
+      protocol: TCP
   selector:
     app: configmapdemo
-
-
-#    spec:
-#      volumes:
-#        - name: config-volume
-#          configMap:
-#            name: configmapdemo
-#            defaultMode: 420
-#      containers:
-#        - name: configmapdemo
-#          image: 'jodios/configmapdemo:latest'
-#          ports:
-#            - name: http-api
-#              containerPort: 8081
-#              protocol: TCP
-#          resources:
-#            limits:
-#              cpu: 200m
-#              memory: 1Gi
-#            requests:
-#              cpu: 100m
-#              memory: 300Mi
-#          volumeMounts:
-#            - name: config-volume
-#              mountPath: /etc/config
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: configmapdemo
+  namespace: prod
+spec:
+  rules:
+    - host: configmapdemo.jodios.com
+      http:
+        paths:
+          - backend:
+              serviceName: configmapdemo
+              servicePort: 80

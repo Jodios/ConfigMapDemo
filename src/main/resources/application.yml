@@ -20,7 +20,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: 'health, info, env, refresh'
+        include: 'health, info, env, refresh, prometheus'
   endpoint:
     restart:
       enabled: true

@@ -10,6 +10,7 @@ public class ConfigmapdemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ConfigmapdemoApplication.class, args);
+
     }
 
 }

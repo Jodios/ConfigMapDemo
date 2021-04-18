@@ -35,11 +35,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
-            <version>1.1.0.RELEASE</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-kubernetes-config</artifactId>-->
+<!--            <version>1.1.0.RELEASE</version>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-kubernetes-client-config</artifactId>-->
@@ -50,6 +50,16 @@
 <!--            <artifactId>spring-cloud-kubernetes-client-config</artifactId>-->
 <!--            <version>${kube_client_version}</version>-->
 <!--        </dependency>-->
+        <!-- Prometheus Support with Micrometer -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
         <!-- swagger for api documentation and rest client generation -->
         <dependency>
             <groupId>io.springfox</groupId>
