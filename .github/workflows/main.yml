@@ -52,10 +52,9 @@ jobs:
       - name: Replace tokens
         uses: cschleiden/replace-tokens@v1.0
         with:
-          files: kube.yaml
+          files: configmapDemo.yaml
         env:
           deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/configmapdemo:${{ github.run_id }}
-          secrets.discordToken: ${{ secrets.DISCORD_KEY }}
 
       - name: Deploy
         uses: danielr1996/kubectl-action@1.0.0
